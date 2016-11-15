@@ -58,16 +58,17 @@ class DressSubmit extends React.Component {
 		const img = document.createElement('IMG');
 		const reader = new FileReader()
 		const canvas = document.getElementById('c')
-		//const thisImage = this.state
+		const thisImage = this.state
 		const thisImageURL = this.state.imagePreviewURL
+		console.log(this.state)
 		
-		reader.onloadend = function() {
+		reader.onloadend = () => {
 			console.log('CHECK2')
-			img.onload = function() {
+			img.onload = () => {
 				console.log('hahaha2')
 		    	const options = {
 		    		canvas: true,
-		    		maxWidth: 1200
+		    		maxWidth: 300
 		    	}
 		    	console.log('hahaha3')
 		    	const currentfile = file
@@ -85,6 +86,7 @@ class DressSubmit extends React.Component {
 		    		currentfile,
 		    		(img) => {
 		    		    document.getElementById('c')
+
 		    		}, 
 		    		options
 		    		)
@@ -109,14 +111,14 @@ class DressSubmit extends React.Component {
 		//console.log(img_src)
 	
 		img.onload = function() {
-			let ratio = window.innerWidth / img.width
-			let canvasWidth = window.innerWidth
-			let canvasHeight = img.height * ratio
+			// let ratio = (window.innerWidth - 64) / img.width
+			// let canvasWidth = window.innerWidth - 64
+			// let canvasHeight = img.height * ratio
 			
 			const OwnCanv = new fabric.Canvas('c', {
 				isDrawingMode: true,
-				width: canvasWidth,
-				height: canvasHeight
+				// width: canvasWidth,
+				// height: canvasHeight
 			});
 
 			// Resize Event
@@ -137,8 +139,8 @@ class DressSubmit extends React.Component {
 				top: 0,
 				lockMovementX: true,
 				lockMovementY: true,
-				width: canvasWidth,
-				height: canvasHeight
+				//width: canvasWidth,
+				//height: canvasHeight
 			});
 
 			imgInstance.crossOrigin = 'anonymous'
@@ -174,8 +176,8 @@ class DressSubmit extends React.Component {
 				let cw
 				let ch
 
-				cw = canvas.width = img.width
-				ch = canvas.height = img.height
+				cw = canvas.width //= img.width
+				ch = canvas.height //= img.height
 
 				let minX = 10000
 				let minY = 10000
@@ -276,10 +278,10 @@ class DressSubmit extends React.Component {
       fontSize: '20px'
     }
 
-    const cStyle = {
-      width: '100%',
-      height: 'auto'
-    }
+    // const cStyle = {
+    //   width: 'auto',
+    //   height: 'auto'
+    // }
 
     return (
       <div className='container'>
@@ -306,7 +308,9 @@ class DressSubmit extends React.Component {
             <button id='load' onClick={this._handlePhoto}>Load</button>
             <button id='edit' onClick={this._handleCrop}>Edit</button>
             {/*<button id='save' onClick={this._handleSavePhoto}>Save</button>*/}
-            <canvas id='c' style={cStyle}></canvas>
+            <div>
+            <canvas id='c'></canvas>
+            </div>
             {/*<img id='canvasImg'></img>*/}
           </div>
 
